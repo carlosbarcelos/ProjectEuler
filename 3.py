@@ -32,12 +32,16 @@ def getFactors(n):
 
     return factorList
 
-# Get a list of factors
-factorList = getFactors(600851475143)
+def compute():
+    # Get a list of factors
+    factorList = getFactors(600851475143)
 
-# Reduce the list to prime numbers
-primeFactorList = list(filter(lambda i: isPrime(i), factorList))
+    # Reduce the list to prime numbers
+    primeFactorList = list(filter(lambda i: isPrime(i), factorList))
 
-# Return the largest number
-largestPrimeFactor = max(primeFactorList)
-print(largestPrimeFactor)
+    # Return the largest number
+    largestPrimeFactor = max(primeFactorList)
+    return largestPrimeFactor
+
+if __name__ == '__main__':
+    print(compute())

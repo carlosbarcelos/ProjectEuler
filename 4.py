@@ -12,12 +12,16 @@ def isPalindrome(n):
     revN = str(n)[::-1]
     return str(n) == revN
 
-largestPalindrome = 0
-for i in range(1000):
-    for j in range(1000):
-        prod = i*j
-        if isPalindrome(prod):
-            if prod > largestPalindrome:
-                largestPalindrome = prod
+def compute():
+    largestPalindrome = 0
+    for i in range(1000):
+        for j in range(1000):
+            prod = i*j
+            if isPalindrome(prod):
+                if prod > largestPalindrome:
+                    largestPalindrome = prod
 
-print(largestPalindrome)
+    return largestPalindrome
+
+if __name__ == '__main__':
+    print(compute())

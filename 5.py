@@ -15,10 +15,11 @@ def isEvenlyDivisible(n, min, max):
             return False
     return True
 
-def getSmallestEvenDivisible(min, max):
+def compute():
     for n in range(1,sys.maxsize):
-        if isEvenlyDivisible(n, min, max):
+        if isEvenlyDivisible(n, 1, 20):
             return n
     return -1 # Error. Ran out of numbers
 
-print(getSmallestEvenDivisible(1, 20))
+if __name__ == '__main__':
+    print(compute())

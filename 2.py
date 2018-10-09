@@ -10,8 +10,6 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 find the sum of the even-valued terms.
 '''
 
-MAX_NUM = 4000000
-
 def fib(MAX_NUM):
     fibList = []
 
@@ -28,13 +26,17 @@ def fib(MAX_NUM):
 
     return fibList
 
-# Get the sequence up to the max number
-fibList = fib(MAX_NUM)
+def compute():
+    MAX_NUM = 4000000
+    # Get the sequence up to the max number
+    fibList = fib(MAX_NUM)
 
-# Sum all even values
-sumEven = 0
-for i in fibList:
-    if i % 2 == 0:
-        sumEven += i
+    # Sum all even values
+    sumEven = 0
+    for i in fibList:
+        if i % 2 == 0:
+            sumEven += i
+    return sumEven
 
-print(sumEven)
+if __name__ == '__main__':
+    print(compute())
