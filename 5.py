@@ -8,6 +8,20 @@ What is the smallest positive number that is evenly divisible by all of the numb
 '''
 import sys
 
+def compute():
+    i = 1
+    for k in (range(1, 21)):
+        if i % k > 0:
+            for j in range(1, 21):
+                if (i * j) % k == 0:
+                    i *= j
+                    break
+    return i
+
+if __name__ == '__main__':
+    print(compute())
+
+''' Original, SLOW solution
 # Determines if n is evenly divisible by all numbers [min, max]
 def isEvenlyDivisible(n, min, max):
     for i in range(min, max+1):
@@ -16,10 +30,10 @@ def isEvenlyDivisible(n, min, max):
     return True
 
 def compute():
-    for n in range(1,sys.maxsize):
-        if isEvenlyDivisible(n, 1, 20):
+    rangeMin = 1
+    rangeMax = 20
+    for n in range(rangeMax,sys.maxsize):
+        if isEvenlyDivisible(n, rangeMin, rangeMax):
             return n
     return -1 # Error. Ran out of numbers
-
-if __name__ == '__main__':
-    print(compute())
+'''
