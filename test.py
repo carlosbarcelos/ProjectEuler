@@ -6,32 +6,45 @@ Tests all of the Python modules against their expected answer.
 
 import importlib # Run solutions as modules
 import csv       # Read answers CSV file
+import math      # Ceiling rounding
 
 def main():
     print('Testing Project Euler Solutions')
-    print('P[ass]  |  F[ail]  |  T[imeout]  |  N[onexistant]')
-    # Open CSV and read values
+    print('P[ass]  |  F[ail]  |  E[Error]  |  .[Nonexistant]  ')
+    # Open CSV and read values into dictionary
     with open('answers.csv') as f:
         reader = csv.DictReader(f)
-        for row in reader:
-            try:
-                # Import numbered module and check solution for answer
-                problem = row['problem']
-                expAnswer = row['answer']
-                module = importlib.import_module(f'{problem}')
-                actAnswer = str(module.compute())
-                # Report the results
-                if actAnswer == expAnswer:
-                    print(f'{problem}: P')
-                else:
-                    print(f'{problem}: F')
-            # Catch well-known exceptions
-            except ModuleNotFoundError:
-                print(f"Module {row['problem']} not found")
-            except AttributeError:
-                print(f'Module {problem} has no attribue compute()')
-            # TODO: Create timeout exception
+        solutionDict = {int(rows['problem']):int(rows['answer']) for rows in reader}
 
+    # Iterate over dictionary 10 at a time
+    maxSolution = max(k for k, v in solutionDict.items())
+    resultsPerLine = 10
+    cnt = 0
+    reportString = f'[1-{resultsPerLine}]\t'
+    for i in range(1,int(math.ceil(maxSolution / 10.0))*10 + 1):
+        try:
+            # Import numbered module and check solution for answer
+            problem = i
+            expAnswer = solutionDict[i]
+            module = importlib.import_module(f'{problem}')
+            actAnswer = module.compute()
+            # Report the results
+            if actAnswer == expAnswer:
+                reportString += 'P '
+            else:
+                reportString += 'F '
+        # Catch well-known exceptions
+        except ModuleNotFoundError:
+            reportString += '. '
+        except KeyError:
+            reportString += '. '
+        except:
+            reportString += 'E '
+
+        # Print out the test report
+        if i%10 == 0:
+            print(reportString)
+            reportString = f'[{i+1}-{i+resultsPerLine}]\t'
 
 if __name__ == '__main__':
     main()
