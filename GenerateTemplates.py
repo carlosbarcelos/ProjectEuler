@@ -20,10 +20,14 @@ def writeSolutionTemplate(soup, directory):
 
     # Create a new template and write to it
     n = re.search(r'\d+', problemNumber).group()
-    fn = f'{n}.py'
+    strN = str(n)
+    padding = '0' * (3-len(strN))
+    ext = '.py'
+
+    fn = padding + strN + ext
     exists = os.path.isfile(fn)
     if exists:
-        print(f'{problemNumber}already exists.')
+        print(fn + ' already exists. Skipping')
         return 1 # Not a valid problem
     else:
         f = open(directory + '/' + fn, 'w')

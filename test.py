@@ -24,9 +24,12 @@ def main():
     for i in range(1,int(math.ceil(maxSolution / 10.0))*10 + 1):
         try:
             # Import numbered module and check solution for answer
-            problem = i
+            problem = str(i)
+            padding = '0' * (3-len(problem))
+            problemString = padding + problem
+
             expAnswer = solutionDict[i]
-            module = importlib.import_module(f'{problem}')
+            module = importlib.import_module(problemString)
             actAnswer = module.compute()
             # Report the results
             if actAnswer == expAnswer:
