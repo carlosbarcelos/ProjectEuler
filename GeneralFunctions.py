@@ -1,3 +1,5 @@
+import math # Common math functions
+
 # Determine if a number is prime
 def isPrime(n):
   if n == 2 or n == 3: return True
@@ -23,3 +25,9 @@ def isPrime(n):
                   factorList += [n//i]
 
       return factorList
+
+# Calculate combinations
+def nCr(n, r):
+    top = math.factorial(n)
+    bottom = math.factorial(r) * math.factorial(n-r)
+    return top // bottom
